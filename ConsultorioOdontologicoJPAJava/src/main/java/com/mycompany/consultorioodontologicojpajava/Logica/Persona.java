@@ -1,23 +1,37 @@
-
 package com.mycompany.consultorioodontologicojpajava.Logica;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona
 {
-   
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+    
     private String dni;
     private String nombre;
     private String apellido;
     private String telefono;
     private String direccion;
+    
+    @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    public Persona( String dni, String nombre, String apellido, 
+    public Persona(String dni, String nombre, String apellido,
             String telefono, String direccion, Date fechaNacimiento)
     {
-        
+
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -29,8 +43,6 @@ public class Persona
     public Persona()
     {
     }
-
-  
 
     public String getDni()
     {
@@ -91,6 +103,5 @@ public class Persona
     {
         this.fechaNacimiento = fechaNacimiento;
     }
-            
-    
+
 }

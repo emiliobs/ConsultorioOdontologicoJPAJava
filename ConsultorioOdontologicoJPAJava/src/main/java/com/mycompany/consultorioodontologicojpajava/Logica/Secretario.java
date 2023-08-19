@@ -2,11 +2,12 @@
 package com.mycompany.consultorioodontologicojpajava.Logica;
 
 import java.util.Date;
+import javax.persistence.Entity;
 
-
+@Entity
 public class Secretario extends Persona
 {
-    private int idSecretario;
+    //private int idSecretario;
     private String sector;
     //Relacion
     private Usuario usuario;
@@ -15,13 +16,15 @@ public class Secretario extends Persona
     {
     }
 
-    public Secretario(int idSecretario, String sector, Usuario usuario, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Secretario(String sector, Usuario usuario, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
         super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
-        this.idSecretario = idSecretario;
         this.sector = sector;
         this.usuario = usuario;
     }
+
+  
+ 
 
     public Usuario getUsuario()
     {
@@ -33,15 +36,15 @@ public class Secretario extends Persona
         this.usuario = usuario;
     }
 
-    public int getIdSecretario()
-    {
-        return idSecretario;
-    }
-
-    public void setIdSecretario(int idSecretario)
-    {
-        this.idSecretario = idSecretario;
-    }
+//    public int getIdSecretario()
+//    {
+//        return idSecretario;
+//    }
+//
+//    public void setIdSecretario(int idSecretario)
+//    {
+//        this.idSecretario = idSecretario;
+//    }
 
     public String getSector()
     {

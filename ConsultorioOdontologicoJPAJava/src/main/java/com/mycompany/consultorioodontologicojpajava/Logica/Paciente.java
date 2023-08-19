@@ -2,11 +2,13 @@ package com.mycompany.consultorioodontologicojpajava.Logica;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
 
+@Entity
 public class Paciente extends Persona
 {
 
-    private int idPaciente;
+  //  private int idPaciente;
     private boolean tieneOS;
     private String tipoDeSangre;
     
@@ -14,25 +16,28 @@ public class Paciente extends Persona
     private Responsable unResponsable;
     private List<Turno> listaTurno;
 
-    public Paciente(int idPaciente, boolean tieneOS, String tipoDeSangre, Responsable unResponsable, List<Turno> listaTurno, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Paciente(boolean tieneOS, String tipoDeSangre, Responsable unResponsable, List<Turno> listaTurno, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
         super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
-        this.idPaciente = idPaciente;
         this.tieneOS = tieneOS;
         this.tipoDeSangre = tipoDeSangre;
         this.unResponsable = unResponsable;
         this.listaTurno = listaTurno;
     }
 
-    public int getIdPaciente()
-    {
-        return idPaciente;
-    }
+   
 
-    public void setIdPaciente(int idPaciente)
-    {
-        this.idPaciente = idPaciente;
-    }
+    
+
+//    public int getIdPaciente()
+//    {
+//        return idPaciente;
+//    }
+//
+//    public void setIdPaciente(int idPaciente)
+//    {
+//        this.idPaciente = idPaciente;
+//    }
 
     public boolean isTieneOS()
     {
