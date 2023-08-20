@@ -3,6 +3,7 @@ package com.mycompany.consultorioodontologicojpajava.Logica;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Secretario extends Persona
@@ -10,41 +11,19 @@ public class Secretario extends Persona
     //private int idSecretario;
     private String sector;
     //Relacion
+    @OneToOne
     private Usuario usuario;
 
     public Secretario()
     {
     }
 
-    public Secretario(String sector, Usuario usuario, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Secretario(String sector, Usuario usuario, int id, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
-        super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
+        super(id, dni, nombre, apellido, telefono, direccion, fechaNacimiento);
         this.sector = sector;
         this.usuario = usuario;
     }
-
-  
- 
-
-    public Usuario getUsuario()
-    {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario)
-    {
-        this.usuario = usuario;
-    }
-
-//    public int getIdSecretario()
-//    {
-//        return idSecretario;
-//    }
-//
-//    public void setIdSecretario(int idSecretario)
-//    {
-//        this.idSecretario = idSecretario;
-//    }
 
     public String getSector()
     {
@@ -56,7 +35,16 @@ public class Secretario extends Persona
         this.sector = sector;
     }
 
-    
-    
+    public Usuario getUsuario()
+    {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario)
+    {
+        this.usuario = usuario;
+    }
+
+   
     
 }

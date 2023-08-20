@@ -1,19 +1,21 @@
 
 package com.mycompany.consultorioodontologicojpajava.Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Odontologo extends Persona
+public class Odontologo extends Persona implements Serializable
 {
     //private int idOdontologo;
     private String especialidad;
     
     //relaciones
-    @
+    @OneToMany(mappedBy = "odontologo")
     private List<Turno> listaTurnos;
     @OneToOne
     private Usuario usuario;
@@ -24,38 +26,14 @@ public class Odontologo extends Persona
     {
     }
 
-    public Odontologo(String especialidad, List<Turno> listaTurnos, Usuario usuario, Horario unHorario, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Odontologo(String especialidad, List<Turno> listaTurnos, Usuario usuario, Horario unHorario, int id, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
-        super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
+        super(id, dni, nombre, apellido, telefono, direccion, fechaNacimiento);
         this.especialidad = especialidad;
         this.listaTurnos = listaTurnos;
         this.usuario = usuario;
         this.unHorario = unHorario;
     }
-
-   
-
-   
-
-    public Horario getUnHorario()
-    {
-        return unHorario;
-    }
-
-    public void setUnHorario(Horario unHorario)
-    {
-        this.unHorario = unHorario;
-    }
-
-//    public int getIdOdontologo()
-//    {
-//        return idOdontologo;
-//    }
-//
-//    public void setIdOdontologo(int idOdontologo)
-//    {
-//        this.idOdontologo = idOdontologo;
-//    }
 
     public String getEspecialidad()
     {
@@ -87,9 +65,17 @@ public class Odontologo extends Persona
         this.usuario = usuario;
     }
 
-   
-    
-    
+    public Horario getUnHorario()
+    {
+        return unHorario;
+    }
+
+    public void setUnHorario(Horario unHorario)
+    {
+        this.unHorario = unHorario;
+    }
+
+          
     
     
 }

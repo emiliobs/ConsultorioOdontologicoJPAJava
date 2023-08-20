@@ -15,18 +15,11 @@ public class Responsable extends Persona
     {
     }
 
-    public Responsable(String tipoResponsable, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Responsable(String tipoResponsable, int id, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
-        super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
+        super(id, dni, nombre, apellido, telefono, direccion, fechaNacimiento);
         this.tipoResponsable = tipoResponsable;
     }
-
-    public Responsable(String tipoResponsable)
-    {
-        this.tipoResponsable = tipoResponsable;
-    }
-
-    
 
     public String getTipoResponsable()
     {
@@ -38,19 +31,8 @@ public class Responsable extends Persona
         this.tipoResponsable = tipoResponsable;
     }
 
-//    public int getIdResponsable()
-//    {
-//        return idResponsable;
-//    }
-//
-//    public void setIdResponsable(int idResponsable)
-//    {
-//        this.idResponsable = idResponsable;
-//    }
+   
 
    
-    
-    
-    
     
 }

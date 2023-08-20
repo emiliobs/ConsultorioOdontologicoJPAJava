@@ -1,43 +1,45 @@
 package com.mycompany.consultorioodontologicojpajava.Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Paciente extends Persona
+public class Paciente extends Persona implements Serializable
 {
 
-  //  private int idPaciente;
+   private int idPaciente;
     private boolean tieneOS;
     private String tipoDeSangre;
     
     //relacion:
+    @OneToOne
     private Responsable unResponsable;
+    @OneToMany(mappedBy = "paciente")
     private List<Turno> listaTurno;
 
-    public Paciente(boolean tieneOS, String tipoDeSangre, Responsable unResponsable, List<Turno> listaTurno, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
+    public Paciente(int idPaciente, boolean tieneOS, String tipoDeSangre, Responsable unResponsable, List<Turno> listaTurno, int id, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
-        super(dni, nombre, apellido, telefono, direccion, fechaNacimiento);
+        super(id, dni, nombre, apellido, telefono, direccion, fechaNacimiento);
+        this.idPaciente = idPaciente;
         this.tieneOS = tieneOS;
         this.tipoDeSangre = tipoDeSangre;
         this.unResponsable = unResponsable;
         this.listaTurno = listaTurno;
     }
 
-   
+    public int getIdPaciente()
+    {
+        return idPaciente;
+    }
 
-    
-
-//    public int getIdPaciente()
-//    {
-//        return idPaciente;
-//    }
-//
-//    public void setIdPaciente(int idPaciente)
-//    {
-//        this.idPaciente = idPaciente;
-//    }
+    public void setIdPaciente(int idPaciente)
+    {
+        this.idPaciente = idPaciente;
+    }
 
     public boolean isTieneOS()
     {
@@ -78,8 +80,8 @@ public class Paciente extends Persona
     {
         this.listaTurno = listaTurno;
     }
-
-     
-
    
+  
+
+       
 }

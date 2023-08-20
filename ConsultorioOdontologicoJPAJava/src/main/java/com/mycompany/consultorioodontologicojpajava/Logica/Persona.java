@@ -1,5 +1,6 @@
 package com.mycompany.consultorioodontologicojpajava.Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +13,12 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Persona
+public class Persona implements Serializable
 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
     
     private String dni;
     private String nombre;
@@ -28,10 +29,9 @@ public class Persona
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    public Persona(String dni, String nombre, String apellido,
-            String telefono, String direccion, Date fechaNacimiento)
+    public Persona(int id, String dni, String nombre, String apellido, String telefono, String direccion, Date fechaNacimiento)
     {
-
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -40,8 +40,20 @@ public class Persona
         this.fechaNacimiento = fechaNacimiento;
     }
 
+   
+
     public Persona()
     {
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getDni()
@@ -103,5 +115,9 @@ public class Persona
     {
         this.fechaNacimiento = fechaNacimiento;
     }
+    
+    
+
+    
 
 }
