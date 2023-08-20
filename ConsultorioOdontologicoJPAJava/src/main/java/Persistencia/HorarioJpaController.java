@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package PerPU;
+package Persistencia;
 
-import Logica.Usuario;
-import PerPU.exceptions.NonexistentEntityException;
+import Logica.Horario;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -19,10 +20,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class UsuarioJpaController implements Serializable
+public class HorarioJpaController implements Serializable
 {
 
-    public UsuarioJpaController(EntityManagerFactory emf)
+    public HorarioJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +34,21 @@ public class UsuarioJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Usuario usuario)
+    public HorarioJpaController()
+    {
+        emf = Persistence.createEntityManagerFactory("DentalPU");
+    }
+    
+    
+
+    public void create(Horario horario)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(usuario);
+            em.persist(horario);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +60,14 @@ public class UsuarioJpaController implements Serializable
         }
     }
 
-    public void edit(Usuario usuario) throws NonexistentEntityException, Exception
+    public void edit(Horario horario) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            usuario = em.merge(usuario);
+            horario = em.merge(horario);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +75,10 @@ public class UsuarioJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = usuario.getIdUsuario();
-                if (findUsuario(id) == null)
+                int id = horario.getIdHorario();
+                if (findHorario(id) == null)
                 {
-                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The horario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +99,17 @@ public class UsuarioJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario usuario;
+            Horario horario;
             try
             {
-                usuario = em.getReference(Usuario.class, id);
-                usuario.getIdUsuario();
+                horario = em.getReference(Horario.class, id);
+                horario.getIdHorario();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The horario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(usuario);
+            em.remove(horario);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +121,23 @@ public class UsuarioJpaController implements Serializable
         }
     }
 
-    public List<Usuario> findUsuarioEntities()
+    public List<Horario> findHorarioEntities()
     {
-        return findUsuarioEntities(true, -1, -1);
+        return findHorarioEntities(true, -1, -1);
     }
 
-    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult)
+    public List<Horario> findHorarioEntities(int maxResults, int firstResult)
     {
-        return findUsuarioEntities(false, maxResults, firstResult);
+        return findHorarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult)
+    private List<Horario> findHorarioEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Usuario.class));
+            cq.select(cq.from(Horario.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +152,12 @@ public class UsuarioJpaController implements Serializable
         }
     }
 
-    public Usuario findUsuario(int id)
+    public Horario findHorario(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Usuario.class, id);
+            return em.find(Horario.class, id);
         }
         finally
         {
@@ -157,13 +165,13 @@ public class UsuarioJpaController implements Serializable
         }
     }
 
-    public int getUsuarioCount()
+    public int getHorarioCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Usuario> rt = cq.from(Usuario.class);
+            Root<Horario> rt = cq.from(Horario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

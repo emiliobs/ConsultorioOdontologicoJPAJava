@@ -1,4 +1,4 @@
-package PerPU.exceptions;
+package Persistencia.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

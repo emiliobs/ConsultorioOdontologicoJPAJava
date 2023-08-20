@@ -2,16 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package PerPU;
+package Persistencia;
 
-import Logica.Secretario;
-import PerPU.exceptions.NonexistentEntityException;
+import Logica.Odontologo;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -19,10 +20,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class SecretarioJpaController implements Serializable
+public class OdontologoJpaController implements Serializable
 {
 
-    public SecretarioJpaController(EntityManagerFactory emf)
+    public OdontologoJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +34,21 @@ public class SecretarioJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Secretario secretario)
+    public OdontologoJpaController()
+    {
+         emf = Persistence.createEntityManagerFactory("DentalPU");
+    }
+    
+    
+
+    public void create(Odontologo odontologo)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(secretario);
+            em.persist(odontologo);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +60,14 @@ public class SecretarioJpaController implements Serializable
         }
     }
 
-    public void edit(Secretario secretario) throws NonexistentEntityException, Exception
+    public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            secretario = em.merge(secretario);
+            odontologo = em.merge(odontologo);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +75,10 @@ public class SecretarioJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = secretario.getId();
-                if (findSecretario(id) == null)
+                int id = odontologo.getId();
+                if (findOdontologo(id) == null)
                 {
-                    throw new NonexistentEntityException("The secretario with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The odontologo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +99,17 @@ public class SecretarioJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Secretario secretario;
+            Odontologo odontologo;
             try
             {
-                secretario = em.getReference(Secretario.class, id);
-                secretario.getId();
+                odontologo = em.getReference(Odontologo.class, id);
+                odontologo.getId();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The secretario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The odontologo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(secretario);
+            em.remove(odontologo);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +121,23 @@ public class SecretarioJpaController implements Serializable
         }
     }
 
-    public List<Secretario> findSecretarioEntities()
+    public List<Odontologo> findOdontologoEntities()
     {
-        return findSecretarioEntities(true, -1, -1);
+        return findOdontologoEntities(true, -1, -1);
     }
 
-    public List<Secretario> findSecretarioEntities(int maxResults, int firstResult)
+    public List<Odontologo> findOdontologoEntities(int maxResults, int firstResult)
     {
-        return findSecretarioEntities(false, maxResults, firstResult);
+        return findOdontologoEntities(false, maxResults, firstResult);
     }
 
-    private List<Secretario> findSecretarioEntities(boolean all, int maxResults, int firstResult)
+    private List<Odontologo> findOdontologoEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Secretario.class));
+            cq.select(cq.from(Odontologo.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +152,12 @@ public class SecretarioJpaController implements Serializable
         }
     }
 
-    public Secretario findSecretario(int id)
+    public Odontologo findOdontologo(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Secretario.class, id);
+            return em.find(Odontologo.class, id);
         }
         finally
         {
@@ -157,13 +165,13 @@ public class SecretarioJpaController implements Serializable
         }
     }
 
-    public int getSecretarioCount()
+    public int getOdontologoCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Secretario> rt = cq.from(Secretario.class);
+            Root<Odontologo> rt = cq.from(Odontologo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

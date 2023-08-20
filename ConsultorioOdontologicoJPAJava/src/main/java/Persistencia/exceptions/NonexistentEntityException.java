@@ -1,4 +1,4 @@
-package PerPU.exceptions;
+package Persistencia.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {
