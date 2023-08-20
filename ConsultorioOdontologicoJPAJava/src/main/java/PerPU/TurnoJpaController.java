@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Persistencia;
+package PerPU;
 
-import Persistencia.exceptions.NonexistentEntityException;
-import com.mycompany.consultorioodontologicojpajava.Logica.Horario;
+import Logica.Turno;
+import PerPU.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,10 +19,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class HorarioJpaController implements Serializable
+public class TurnoJpaController implements Serializable
 {
 
-    public HorarioJpaController(EntityManagerFactory emf)
+    public TurnoJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +33,14 @@ public class HorarioJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Horario horario)
+    public void create(Turno turno)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(horario);
+            em.persist(turno);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +52,14 @@ public class HorarioJpaController implements Serializable
         }
     }
 
-    public void edit(Horario horario) throws NonexistentEntityException, Exception
+    public void edit(Turno turno) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            horario = em.merge(horario);
+            turno = em.merge(turno);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +67,10 @@ public class HorarioJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = horario.getIdHorario();
-                if (findHorario(id) == null)
+                int id = turno.getIdTurno();
+                if (findTurno(id) == null)
                 {
-                    throw new NonexistentEntityException("The horario with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The turno with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +91,17 @@ public class HorarioJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Horario horario;
+            Turno turno;
             try
             {
-                horario = em.getReference(Horario.class, id);
-                horario.getIdHorario();
+                turno = em.getReference(Turno.class, id);
+                turno.getIdTurno();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The horario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The turno with id " + id + " no longer exists.", enfe);
             }
-            em.remove(horario);
+            em.remove(turno);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +113,23 @@ public class HorarioJpaController implements Serializable
         }
     }
 
-    public List<Horario> findHorarioEntities()
+    public List<Turno> findTurnoEntities()
     {
-        return findHorarioEntities(true, -1, -1);
+        return findTurnoEntities(true, -1, -1);
     }
 
-    public List<Horario> findHorarioEntities(int maxResults, int firstResult)
+    public List<Turno> findTurnoEntities(int maxResults, int firstResult)
     {
-        return findHorarioEntities(false, maxResults, firstResult);
+        return findTurnoEntities(false, maxResults, firstResult);
     }
 
-    private List<Horario> findHorarioEntities(boolean all, int maxResults, int firstResult)
+    private List<Turno> findTurnoEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Horario.class));
+            cq.select(cq.from(Turno.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +144,12 @@ public class HorarioJpaController implements Serializable
         }
     }
 
-    public Horario findHorario(int id)
+    public Turno findTurno(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Horario.class, id);
+            return em.find(Turno.class, id);
         }
         finally
         {
@@ -157,13 +157,13 @@ public class HorarioJpaController implements Serializable
         }
     }
 
-    public int getHorarioCount()
+    public int getTurnoCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Horario> rt = cq.from(Horario.class);
+            Root<Turno> rt = cq.from(Turno.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

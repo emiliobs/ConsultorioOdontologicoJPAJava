@@ -1,5 +1,5 @@
 
-package com.mycompany.consultorioodontologicojpajava.Logica;
+package Logica;
 
 import java.io.Serializable;
 import javax.annotation.Generated;

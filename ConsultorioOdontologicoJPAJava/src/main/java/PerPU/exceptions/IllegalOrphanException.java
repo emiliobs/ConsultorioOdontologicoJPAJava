@@ -1,4 +1,4 @@
-package com.mycompany.consultorioodontologicojpajava.Logica.exceptions;
+package PerPU.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

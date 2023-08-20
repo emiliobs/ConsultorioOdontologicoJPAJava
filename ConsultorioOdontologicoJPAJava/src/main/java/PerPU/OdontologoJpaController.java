@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Persistencia;
+package PerPU;
 
-import Persistencia.exceptions.NonexistentEntityException;
-import com.mycompany.consultorioodontologicojpajava.Logica.Turno;
+import Logica.Odontologo;
+import PerPU.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,10 +19,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class TurnoJpaController implements Serializable
+public class OdontologoJpaController implements Serializable
 {
 
-    public TurnoJpaController(EntityManagerFactory emf)
+    public OdontologoJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +33,14 @@ public class TurnoJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Turno turno)
+    public void create(Odontologo odontologo)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(turno);
+            em.persist(odontologo);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +52,14 @@ public class TurnoJpaController implements Serializable
         }
     }
 
-    public void edit(Turno turno) throws NonexistentEntityException, Exception
+    public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            turno = em.merge(turno);
+            odontologo = em.merge(odontologo);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +67,10 @@ public class TurnoJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = turno.getIdTurno();
-                if (findTurno(id) == null)
+                int id = odontologo.getId();
+                if (findOdontologo(id) == null)
                 {
-                    throw new NonexistentEntityException("The turno with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The odontologo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +91,17 @@ public class TurnoJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Turno turno;
+            Odontologo odontologo;
             try
             {
-                turno = em.getReference(Turno.class, id);
-                turno.getIdTurno();
+                odontologo = em.getReference(Odontologo.class, id);
+                odontologo.getId();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The turno with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The odontologo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(turno);
+            em.remove(odontologo);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +113,23 @@ public class TurnoJpaController implements Serializable
         }
     }
 
-    public List<Turno> findTurnoEntities()
+    public List<Odontologo> findOdontologoEntities()
     {
-        return findTurnoEntities(true, -1, -1);
+        return findOdontologoEntities(true, -1, -1);
     }
 
-    public List<Turno> findTurnoEntities(int maxResults, int firstResult)
+    public List<Odontologo> findOdontologoEntities(int maxResults, int firstResult)
     {
-        return findTurnoEntities(false, maxResults, firstResult);
+        return findOdontologoEntities(false, maxResults, firstResult);
     }
 
-    private List<Turno> findTurnoEntities(boolean all, int maxResults, int firstResult)
+    private List<Odontologo> findOdontologoEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Turno.class));
+            cq.select(cq.from(Odontologo.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +144,12 @@ public class TurnoJpaController implements Serializable
         }
     }
 
-    public Turno findTurno(int id)
+    public Odontologo findOdontologo(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Turno.class, id);
+            return em.find(Odontologo.class, id);
         }
         finally
         {
@@ -157,13 +157,13 @@ public class TurnoJpaController implements Serializable
         }
     }
 
-    public int getTurnoCount()
+    public int getOdontologoCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Turno> rt = cq.from(Turno.class);
+            Root<Odontologo> rt = cq.from(Odontologo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

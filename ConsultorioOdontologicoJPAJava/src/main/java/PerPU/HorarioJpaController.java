@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Persistencia;
+package PerPU;
 
-import Persistencia.exceptions.NonexistentEntityException;
-import com.mycompany.consultorioodontologicojpajava.Logica.Responsable;
+import Logica.Horario;
+import PerPU.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,10 +19,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class ResponsableJpaController implements Serializable
+public class HorarioJpaController implements Serializable
 {
 
-    public ResponsableJpaController(EntityManagerFactory emf)
+    public HorarioJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +33,14 @@ public class ResponsableJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Responsable responsable)
+    public void create(Horario horario)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(responsable);
+            em.persist(horario);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +52,14 @@ public class ResponsableJpaController implements Serializable
         }
     }
 
-    public void edit(Responsable responsable) throws NonexistentEntityException, Exception
+    public void edit(Horario horario) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            responsable = em.merge(responsable);
+            horario = em.merge(horario);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +67,10 @@ public class ResponsableJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = responsable.getId();
-                if (findResponsable(id) == null)
+                int id = horario.getIdHorario();
+                if (findHorario(id) == null)
                 {
-                    throw new NonexistentEntityException("The responsable with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The horario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +91,17 @@ public class ResponsableJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Responsable responsable;
+            Horario horario;
             try
             {
-                responsable = em.getReference(Responsable.class, id);
-                responsable.getId();
+                horario = em.getReference(Horario.class, id);
+                horario.getIdHorario();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The responsable with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The horario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(responsable);
+            em.remove(horario);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +113,23 @@ public class ResponsableJpaController implements Serializable
         }
     }
 
-    public List<Responsable> findResponsableEntities()
+    public List<Horario> findHorarioEntities()
     {
-        return findResponsableEntities(true, -1, -1);
+        return findHorarioEntities(true, -1, -1);
     }
 
-    public List<Responsable> findResponsableEntities(int maxResults, int firstResult)
+    public List<Horario> findHorarioEntities(int maxResults, int firstResult)
     {
-        return findResponsableEntities(false, maxResults, firstResult);
+        return findHorarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Responsable> findResponsableEntities(boolean all, int maxResults, int firstResult)
+    private List<Horario> findHorarioEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Responsable.class));
+            cq.select(cq.from(Horario.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +144,12 @@ public class ResponsableJpaController implements Serializable
         }
     }
 
-    public Responsable findResponsable(int id)
+    public Horario findHorario(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Responsable.class, id);
+            return em.find(Horario.class, id);
         }
         finally
         {
@@ -157,13 +157,13 @@ public class ResponsableJpaController implements Serializable
         }
     }
 
-    public int getResponsableCount()
+    public int getHorarioCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Responsable> rt = cq.from(Responsable.class);
+            Root<Horario> rt = cq.from(Horario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

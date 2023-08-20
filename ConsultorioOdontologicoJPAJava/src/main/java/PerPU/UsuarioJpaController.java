@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Persistencia;
+package PerPU;
 
-import Persistencia.exceptions.NonexistentEntityException;
-import com.mycompany.consultorioodontologicojpajava.Logica.Paciente;
+import Logica.Usuario;
+import PerPU.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,10 +19,10 @@ import javax.persistence.criteria.Root;
  *
  * @author Emilio
  */
-public class PacienteJpaController implements Serializable
+public class UsuarioJpaController implements Serializable
 {
 
-    public PacienteJpaController(EntityManagerFactory emf)
+    public UsuarioJpaController(EntityManagerFactory emf)
     {
         this.emf = emf;
     }
@@ -33,14 +33,14 @@ public class PacienteJpaController implements Serializable
         return emf.createEntityManager();
     }
 
-    public void create(Paciente paciente)
+    public void create(Usuario usuario)
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(paciente);
+            em.persist(usuario);
             em.getTransaction().commit();
         }
         finally
@@ -52,14 +52,14 @@ public class PacienteJpaController implements Serializable
         }
     }
 
-    public void edit(Paciente paciente) throws NonexistentEntityException, Exception
+    public void edit(Usuario usuario) throws NonexistentEntityException, Exception
     {
         EntityManager em = null;
         try
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            paciente = em.merge(paciente);
+            usuario = em.merge(usuario);
             em.getTransaction().commit();
         }
         catch (Exception ex)
@@ -67,10 +67,10 @@ public class PacienteJpaController implements Serializable
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0)
             {
-                int id = paciente.getId();
-                if (findPaciente(id) == null)
+                int id = usuario.getIdUsuario();
+                if (findUsuario(id) == null)
                 {
-                    throw new NonexistentEntityException("The paciente with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -91,17 +91,17 @@ public class PacienteJpaController implements Serializable
         {
             em = getEntityManager();
             em.getTransaction().begin();
-            Paciente paciente;
+            Usuario usuario;
             try
             {
-                paciente = em.getReference(Paciente.class, id);
-                paciente.getId();
+                usuario = em.getReference(Usuario.class, id);
+                usuario.getIdUsuario();
             }
             catch (EntityNotFoundException enfe)
             {
-                throw new NonexistentEntityException("The paciente with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
-            em.remove(paciente);
+            em.remove(usuario);
             em.getTransaction().commit();
         }
         finally
@@ -113,23 +113,23 @@ public class PacienteJpaController implements Serializable
         }
     }
 
-    public List<Paciente> findPacienteEntities()
+    public List<Usuario> findUsuarioEntities()
     {
-        return findPacienteEntities(true, -1, -1);
+        return findUsuarioEntities(true, -1, -1);
     }
 
-    public List<Paciente> findPacienteEntities(int maxResults, int firstResult)
+    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult)
     {
-        return findPacienteEntities(false, maxResults, firstResult);
+        return findUsuarioEntities(false, maxResults, firstResult);
     }
 
-    private List<Paciente> findPacienteEntities(boolean all, int maxResults, int firstResult)
+    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult)
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Paciente.class));
+            cq.select(cq.from(Usuario.class));
             Query q = em.createQuery(cq);
             if (!all)
             {
@@ -144,12 +144,12 @@ public class PacienteJpaController implements Serializable
         }
     }
 
-    public Paciente findPaciente(int id)
+    public Usuario findUsuario(int id)
     {
         EntityManager em = getEntityManager();
         try
         {
-            return em.find(Paciente.class, id);
+            return em.find(Usuario.class, id);
         }
         finally
         {
@@ -157,13 +157,13 @@ public class PacienteJpaController implements Serializable
         }
     }
 
-    public int getPacienteCount()
+    public int getUsuarioCount()
     {
         EntityManager em = getEntityManager();
         try
         {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Paciente> rt = cq.from(Paciente.class);
+            Root<Usuario> rt = cq.from(Usuario.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
