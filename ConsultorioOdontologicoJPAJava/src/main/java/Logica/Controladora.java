@@ -8,13 +8,26 @@ import Persistencia.ControladoraPersistencia;
 public class Controladora
 {
     
-    ControladoraPersistencia controladoraPersistencia = new ControladoraPersistencia();
-    
-    
-    public  void  CrearUsuario(int id, String nombreUsaurio, String contrasenia, String rol)
+    ControladoraPersistencia  controladoraPersistencia = new ControladoraPersistencia();
+
+    public Controladora()
     {
-        Usuario usuario = new Usuario(id, nombreUsaurio, contrasenia, rol);
-        controladoraPersistencia.CrearUsuario(usuario);
+       
     }
+    
+    
+
+    public void CrearUsuario(String nombreUsuario, String contrasenia, String rol)
+    {
+        Usuario  datosUsuario = new Usuario();
+        datosUsuario.setNombreUsuario(nombreUsuario);
+        datosUsuario.setContrasenia(contrasenia);
+        datosUsuario.setRol(rol);
+        
+        controladoraPersistencia.CreateUsuario(datosUsuario);
+    }
+    
+    
+   
     
 }

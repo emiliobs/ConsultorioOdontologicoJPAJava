@@ -31,6 +31,12 @@ public class Paciente extends Persona implements Serializable
         this.listaTurno = listaTurno;
     }
 
+    public Paciente()
+    {
+    }
+
+    
+    
     public int getIdPaciente()
     {
         return idPaciente;

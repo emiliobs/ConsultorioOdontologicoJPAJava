@@ -55,7 +55,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-solid fa-users"></i>
+                    <i class="fas fa-solid fa-user"></i>
                     <span>Pacientes</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -66,7 +66,24 @@
                         <a class="collapse-item" href="cards.html">Alta Pacientes</a>
                     </div>
                 </div>
-            </li>                
+            </li>      
+            
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesOne"
+                   aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-solid fa-users"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapseUtilitiesOne" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="buttons.html">Ver Usuario</a>
+                        <a class="collapse-item" href="altaUsuarios.jsp">Alta Usuarios</a>
+                    </div>
+                </div>
+            </li>      
+            
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -82,7 +99,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <h1  style="color: #4368D6;  font-family: cursive;">Clinica Odontológica</h1>
+                    <h1  class="ml-sm-2px" style="color: #4368D6;  font-family: cursive;">Clinica Odontológica</h1>
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i> 

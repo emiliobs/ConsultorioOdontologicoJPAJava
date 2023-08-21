@@ -4,7 +4,7 @@
 <%@include file="Components/bodyPrimeraParte.jsp"  %>
 
 <div class="container">
-    
+
     <div class="col-lg-12">
         <div class="card text-center">
             <div class="card-title">
@@ -41,7 +41,7 @@
                             <input type="text" class="form-control form-control-user"
                                    id="especialidad" placeholder="Especialidad">
                         </div>
-                        
+
                         <!-- Aqui va todo lo que se respecta a horarios y usuarios -->
                     </div>
 
@@ -54,7 +54,7 @@
             </form>
         </div> 
     </div>
-  
+
 </div>
 
 

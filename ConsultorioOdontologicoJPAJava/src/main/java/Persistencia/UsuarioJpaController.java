@@ -36,7 +36,7 @@ public class UsuarioJpaController implements Serializable
 
     public UsuarioJpaController()
     {
-             emf = Persistence.createEntityManagerFactory("DentalPU");
+                    emf= Persistence.createEntityManagerFactory("DentalPU");
 
     }
     
