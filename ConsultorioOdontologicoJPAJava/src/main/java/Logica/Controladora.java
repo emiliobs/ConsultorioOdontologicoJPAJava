@@ -3,6 +3,8 @@ package Logica;
 
 
 import Persistencia.ControladoraPersistencia;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Controladora
@@ -25,6 +27,11 @@ public class Controladora
         datosUsuario.setRol(rol);
         
         controladoraPersistencia.CreateUsuario(datosUsuario);
+    }
+
+    public List<Usuario> GetUsuarios()
+    {
+        return controladoraPersistencia.GetUsuarios();
     }
     
     

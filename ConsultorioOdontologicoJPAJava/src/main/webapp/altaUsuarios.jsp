@@ -10,20 +10,21 @@
             <div class="card-title">
                 <h1 class="font-weight-bold font-italic"  style="color: #4368D6;">Alta Usuarios</h1>
             </div>
+            <hr/>
             <div class="card-body ">
                 <form class="user" action="SvUsuario" method="post">
                     <div class="form-group col">
                         <div class="col-sm-8 ml-5 mb-sm-3">
                             <input type="text" class="form-control form-control-user" id="nombreusaurio"
-                                   placeholder="Nombre Usuario....." name="txtNombreUsuario">
+                                   placeholder="Nombre Usuario....." name="txtNombreUsuario" required="Ingrese Nombre">
                         </div>             
                         <div class="col-sm-8 ml-5 mt-sm-3">
                             <input type="password" class="form-control form-control-user" id="comtrasenia"
-                                   placeholder="Contrasenia....." name="txtContrasenia">
+                                   placeholder="Contrasenia....." name="txtContrasenia" required="Ingrese una Contrasena">
                         </div>
                         <div class="col-sm-8  ml-5 mt-sm-3">
                             <input type="text" class="form-control form-control-user" id="ROL"
-                                   placeholder="Rol....." name="txtRol">
+                                   placeholder="Rol....." name="txtRol" required="Ingrese un Rol">
                         </div>
 
 
