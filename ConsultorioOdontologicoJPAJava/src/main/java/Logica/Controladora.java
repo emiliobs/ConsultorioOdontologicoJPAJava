@@ -38,6 +38,16 @@ public class Controladora
     {
         controladoraPersistencia.BorrarUsuario(idUsuario);
     }
+
+    public Usuario TraerUsuarioPorId(int idUsuario)
+    {
+        return  controladoraPersistencia.TraerUsuarioPorId(idUsuario);
+    }
+
+    public void EditarUsuario(Usuario usuario)
+    {
+        controladoraPersistencia.EditarUsuario(usuario);
+    }
     
     
    

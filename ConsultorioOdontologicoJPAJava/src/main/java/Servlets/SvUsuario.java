@@ -34,10 +34,8 @@ public class SvUsuario extends HttpServlet
          List<Usuario> listaUsuarios = new  ArrayList<>();
          
          listaUsuarios = controladora.GetUsuarios();
-         
-         
-      
-         
+           
+              
          //sessiones
          HttpSession  MiHttpSession =  request.getSession();
          MiHttpSession.setAttribute("listaUsuarios", listaUsuarios);       
@@ -57,11 +55,7 @@ public class SvUsuario extends HttpServlet
         String contrasenia = request.getParameter("txtContrasenia");
         String rol = request.getParameter("txtRol");
 
-       
-        System.out.println(nombreUsuario);
-        System.out.println(contrasenia);
-        System.out.println( rol);
-        
+                  
         controladora.CrearUsuario( nombreUsuario, contrasenia, rol);
         
          response.sendRedirect("index.jsp");

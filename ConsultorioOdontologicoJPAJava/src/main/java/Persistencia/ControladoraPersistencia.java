@@ -55,6 +55,23 @@ public class ControladoraPersistencia
         }
     }
 
+    public Usuario TraerUsuarioPorId(int idUsuario)
+    {
+        return usuarioJpaController.findUsuario(idUsuario);
+    }
+
+    public void EditarUsuario(Usuario usuario)
+    {
+        try
+        {
+            usuarioJpaController.edit(usuario);
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     
     
