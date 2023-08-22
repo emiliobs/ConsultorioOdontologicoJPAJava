@@ -21,7 +21,7 @@
                             <th>Id</th>
                             <th>Nombre del Usuario</th>
                             <th>Rol del Usuario</th>
-                            <th>Acciones</th>
+                            <th style="width: 210px:">Acción</th>
                         </tr>
                     </thead>
                     <%
@@ -29,14 +29,22 @@
                     %>
                     <tbody>
                         <%  for (Usuario usuario : listsUsuarios)
-                       {%>
+                            {%>
                         <tr>
-                            <td><%=usuario.getIdUsuario()%></td>
+                            <td id="IdUsuario"><%=usuario.getIdUsuario()%><%=usuario.getIdUsuario()%></td>
                             <td><%=usuario.getNombreUsuario()%></td>
                             <td><%=usuario.getRol()%></td>
                             <td>
-                                <button type="submit" class="btn btn-primary">Editar</button>
-                                <button type="submit" class="btn btn-danger">Elimiar</button>
+                                <div style="display: flex; width: 230px;">
+                                    <form action="SvEditarUsuario" method="post" name="editar">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-right: 5px; "><i class="fas fa-pencil-alt"></i> Editar</button>
+                                        <input type="hidden" name="id" value="<%=usuario.getIdUsuario()%>">
+                                    </form> 
+                                    <form action="SvEliminarUsuario" method="post" name="eliminar">
+                                        <button type="submit" class="btn btn-danger btn-user btn-block" style="margin-left: 5px;"><i class="fas fa-trash-alt "></i> Eliminar</button>
+                                        <input type="hidden" name="id" value="<%=usuario.getIdUsuario()%>">
+                                    </form> 
+                                </div>
                             </td>
                         </tr>   
                         <%}%>
@@ -46,7 +54,7 @@
                             <th>Id </th>
                             <th>Nombre del Usuario</th>
                             <th>Rol del Usaurio</th>
-                            <th>Acciones</th>
+                            <th style="width: 210px;">Acción</th>
                         </tr>
                     </tfoot>
                 </table>

@@ -43,13 +43,9 @@ public class SvUsuario extends HttpServlet
          MiHttpSession.setAttribute("listaUsuarios", listaUsuarios);       
          
          
-            for (Usuario listaUsuario : listaUsuarios)
-        {
-            System.out.println(listaUsuario.getNombreUsuario());
-        }
-                 
+
          response.sendRedirect("verUsuario.jsp");
-         
+       
     }
 
     @Override

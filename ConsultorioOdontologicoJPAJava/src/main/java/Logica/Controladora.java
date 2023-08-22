@@ -33,6 +33,11 @@ public class Controladora
     {
         return controladoraPersistencia.GetUsuarios();
     }
+
+    public void BorrarUsuario(int idUsuario)
+    {
+        controladoraPersistencia.BorrarUsuario(idUsuario);
+    }
     
     
    
