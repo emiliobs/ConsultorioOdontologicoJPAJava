@@ -37,11 +37,11 @@
                             <td>
                                 <div style="display: flex; width: 230px;">
                                     <form action="SvEditarUsuario" method="post" name="editar">
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-right: 5px; "><i class="fas fa-pencil-alt"></i> Editar</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="margin-right:  5px; "><i class="fas fa-pencil-alt"></i> Editar</button>
                                         <input type="hidden" name="id" value="<%=usuario.getIdUsuario()%>">
                                     </form> 
                                     <form action="SvEliminarUsuario" method="post" name="eliminar">
-                                        <button type="submit" class="btn btn-danger btn-user btn-block" style="margin-left: 5px;"><i class="fas fa-trash-alt "></i> Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-user btn-block" style="margin-left:   5px;" ><i class="fas fa-trash-alt " ></i> Eliminar</button>
                                         <input type="hidden" name="id" value="<%=usuario.getIdUsuario()%>">
                                     </form> 
                                 </div>
