@@ -14,3 +14,7 @@
 ## Listar y Eliminar Usuarios
 <img width="1267" alt="image" src="https://github.com/emiliobs/ConsultorioOdontologicoJPAJava/assets/3122465/a3116f4b-ea67-475f-a134-be92fc942b9c">
 
+# Web  Consultorio Odontológico en JPA Java y Servlets
+
+## Editar  Usuarios
+<img width="1278" alt="image" src="https://github.com/emiliobs/ConsultorioOdontologicoJPAJava/assets/3122465/d6f46463-ab58-402d-ac39-e738cb58947a">
