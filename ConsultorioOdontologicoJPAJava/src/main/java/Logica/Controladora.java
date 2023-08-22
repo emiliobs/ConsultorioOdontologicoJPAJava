@@ -48,6 +48,29 @@ public class Controladora
     {
         controladoraPersistencia.EditarUsuario(usuario);
     }
+
+    public boolean ComprobarIngreso(String usuario, String password)
+    {
+        boolean ingreso = false;
+        
+        List<Usuario> listaUsuario = new ArrayList();
+        listaUsuario = controladoraPersistencia.GetUsuarios();
+        
+        for (Usuario getUsuario : listaUsuario)
+        {
+            if (getUsuario.getNombreUsuario().equals(usuario) && getUsuario.getContrasenia().equals(password))
+            {
+                ingreso = true;
+            }
+            else
+            {
+                ingreso = false;
+            }
+                    
+        }
+        
+        return  ingreso;
+    }
     
     
    
