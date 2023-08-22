@@ -5,7 +5,7 @@
 
 # Web Consultorio Odontologico JPA Java
 
-## Agragar Usaurios
+## Agregar Usaurios
 <img width="1273" alt="image" src="https://github.com/emiliobs/ConsultorioOdontologicoJPAJava/assets/3122465/808d1e27-efa8-451a-8a2d-bb73041f606b">
 
 
