@@ -1,6 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <body id="page-top">
+    
+       <!-- Validacción Sesión -->
+    <%
+        HttpSession httpSession = request.getSession();
+        Boolean usuario1 = (Boolean) request.getSession().getAttribute("usuario");
+
+        if (usuario1==null)
+        {
+            response.sendRedirect("sinLogin.jsp");
+        }
+  
+%>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -67,8 +79,8 @@
                     </div>
                 </div>
             </li>      
-            
-                <li class="nav-item">
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesOne"
                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-solid fa-users"></i>
@@ -83,7 +95,7 @@
                     </div>
                 </div>
             </li>      
-            
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -112,7 +124,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Emilio Barrera</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -138,18 +150,10 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
 
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+             
 
-                    <!-- Page Heading -->
-                    <!--comment 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Clinica Odontológica</h1>                           
-                    </div>
-                      -->

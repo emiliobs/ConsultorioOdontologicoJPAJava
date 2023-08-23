@@ -1,31 +1,26 @@
-
 package Logica;
-
 
 import Persistencia.ControladoraPersistencia;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Controladora
 {
-    
-    ControladoraPersistencia  controladoraPersistencia = new ControladoraPersistencia();
+
+    ControladoraPersistencia controladoraPersistencia = new ControladoraPersistencia();
 
     public Controladora()
     {
-       
+
     }
-    
-    
 
     public void CrearUsuario(String nombreUsuario, String contrasenia, String rol)
     {
-        Usuario  datosUsuario = new Usuario();
+        Usuario datosUsuario = new Usuario();
         datosUsuario.setNombreUsuario(nombreUsuario);
         datosUsuario.setContrasenia(contrasenia);
         datosUsuario.setRol(rol);
-        
+
         controladoraPersistencia.CreateUsuario(datosUsuario);
     }
 
@@ -41,7 +36,7 @@ public class Controladora
 
     public Usuario TraerUsuarioPorId(int idUsuario)
     {
-        return  controladoraPersistencia.TraerUsuarioPorId(idUsuario);
+        return controladoraPersistencia.TraerUsuarioPorId(idUsuario);
     }
 
     public void EditarUsuario(Usuario usuario)
@@ -52,10 +47,10 @@ public class Controladora
     public boolean ComprobarIngreso(String usuario, String password)
     {
         boolean ingreso = false;
-        
+
         List<Usuario> listaUsuario = new ArrayList();
         listaUsuario = controladoraPersistencia.GetUsuarios();
-        
+
         for (Usuario getUsuario : listaUsuario)
         {
             if (getUsuario.getNombreUsuario().equals(usuario) && getUsuario.getContrasenia().equals(password))
@@ -66,13 +61,11 @@ public class Controladora
             {
                 ingreso = false;
             }
-                    
+
         }
-        
-        return  ingreso;
+
+        return ingreso;
     }
-    
-    
+
    
-    
 }
